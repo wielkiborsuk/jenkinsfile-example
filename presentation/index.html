@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <!-- EDYTUJ odpowiednio tagi: TITLE,DESCRIPTION,AUTHOR -->
+    <title>Jenkinsfile the interesting parts</title>
+    <meta name="description" content="Jenkinsfile - the good the bad and the ugly">
+    <meta name="author" content="Michał Borkowski">
+
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+<link href="main.css" rel="stylesheet"></head>
+<!-- usuń klasę jeśli chcesz ciemne style (zenburn) dla 'code snippets' -->
+<body>
+<div class="reveal">
+    <div class="slides">
+        <!-- TUTAJ ZACZYNA SIĘ PREZENTACJA - pierwszy slide -->
+
+        <section data-state="squares-off theme orange">
+          <p><img src="../images/pgssoftware-logo-white.svg" alt="logo" class="img200"></p>
+          <h2>Jenkinsfile - części ciekawe i pożyteczne</h2>
+          <p>Czyli na co warto zwrócić uwagę przy nauce Jenkins Pipeline</p>
+          <ul class="list-horizontal">
+            <li>Michał Borkowski</li>
+            <li>mborkowski@pgs-soft.com</li>
+          </ul>
+          <p><a style="color: inherit" href="https://jenkinsfile-example.firebaseapp.com/#/">https://jenkinsfile-example.firebaseapp.com/#/</a></p>
+        </section>
+
+        <section data-state="squares-off theme dark sidebar">
+          <h3>Tematy na dziś</h3>
+          <ul>
+            <li>Jenkinsfile - deklaracyjny pipeline</li>
+            <li>Opcje builda</li>
+            <li>Kontrola wykonania</li>
+          </ul>
+        </section>
+
+        <section data-state="squares-off theme dark"
+                 data-markdown="sections/pipeline_script.md"
+                 data-separator="^\n\n\n"
+                 data-separator-vertical="^\n\n"
+                 data-separator-notes="^Note:">
+        </section>
+
+        <section data-state="squares-off theme dark">
+          <p style="font-size: 1.5em;"><a href="https://jenkinsfile-example.firebaseapp.com/#/">https://jenkinsfile-example.firebaseapp.com/#/</a></p>
+          <pre style="display: none;">
+            <code>&zsj;</code>
+          </pre>
+        </section>
+
+        <!-- TUTAJ KOŃCZY SIĘ PREZENTACJA -->
+    </div>
+</div>
+<script type="text/javascript">
+  window.revealConfig = {mouseWheel: false, transition: 'none',
+    readyListeners: [
+      function (event) {
+        // Extract stretched images
+        document.body.querySelectorAll('.slides section p img.stretch').forEach(function (element) {
+          var parent = element.parentElement;
+          parent.parentElement.insertBefore(element, parent);
+          parent.remove();
+        });
+      }
+    ]
+  };
+</script>
+
+<script type="text/javascript" src="presentation.js"></script></body>
+</html>
