@@ -8,11 +8,11 @@
 		<version>2.1.2.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>org.norasoft.jenkinsfile</groupId>
-	<artifactId>demo</artifactId>
+	<groupId>org.norasoft</groupId>
+	<artifactId>jenkinsfile</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>demo</name>
-	<description>Demo project for Spring Boot</description>
+	<name>jenkinsfile</name>
+	<description>Demo project for new Jenkins builds</description>
 
 	<properties>
 		<java.version>1.8</java.version>
