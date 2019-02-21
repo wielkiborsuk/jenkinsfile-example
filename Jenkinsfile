@@ -1,9 +1,15 @@
-def testStages = (1..6).collectEntries { [it: generateStage(it)] }
+def testStages = (1..6).collect{ "${it}" }.collectEntries { [(it): generateStage(it)] }
 def generateStage(index) {
     return {
-        stage("test stage: ${index}") {
-                echo "This is test job number: ${index}."
-                sh "mvn test -Dtest=Demo${index}Tests"
+        waitUntil {
+            try {
+              echo "This is test job number: ${index}."
+              sh "mvn test -Dtest=Demo${index}Tests"
+              true
+            } catch(error) {
+              input "Retry the job?"
+              false
+            }
         }
     }
 }
