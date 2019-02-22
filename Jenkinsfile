@@ -60,6 +60,7 @@ pipeline {
             }
             input {
                 message "Proceed with the deployment?"
+                submitter "admin"
             }
 
             steps {
