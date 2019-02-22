@@ -23,6 +23,7 @@ pipeline {
     }
 
     stages {
+/*
         stage('build') {
             steps {
                 sh 'mvn clean compile'
@@ -58,7 +59,7 @@ pipeline {
                 junit allowEmptyResults: true, testResults: 'target/surefire-reports/*.xml'
             }
         }
-
+*/
         stage('deploy') {
             when {
                 branch 'master'
@@ -66,14 +67,15 @@ pipeline {
             }
             input {
                 message "Proceed with the deployment?"
-                submitter "admin"
+                submitter "admin,test"
+                submitterParameter "USER"
                 parameters {
                     choice(choices: ['softlive', 'live'], name: 'DEPLOY_ENV', description: "Which env do you want to deploy to?")
                 }
             }
 
             steps {
-                echo "Deployment to instance: ${params.DEPLOY_ENV}"
+                echo "Deployment to instance: ${DEPLOY_ENV}, approved by ${USER}"
                 echo "!!!"
                 echo "!!!"
                 echo "call it a success!!!"
