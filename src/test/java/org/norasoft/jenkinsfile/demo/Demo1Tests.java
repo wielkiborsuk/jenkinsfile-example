@@ -1,17 +1,19 @@
 package org.norasoft.jenkinsfile.demo;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.mockito.junit.MockitoJUnitRunner;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
+import java.util.Random;
+
+@RunWith(MockitoJUnitRunner.class)
 public class Demo1Tests {
 
 	@Test
 	public void contextLoads1() throws InterruptedException {
-		Thread.sleep(5000);
+//		Thread.sleep(5000);
+		Assert.assertTrue(new Random().nextBoolean());
 	}
 
 }
