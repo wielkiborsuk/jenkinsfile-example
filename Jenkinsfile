@@ -17,6 +17,11 @@ def generateStage(index) {
 pipeline {
     agent any
 
+    options {
+        disableConcurrentBuilds()
+        buildDiscarder(logRotator(numToKeepStr: '1'))
+    }
+
     stages {
         stage('build') {
             steps {
@@ -57,17 +62,21 @@ pipeline {
         stage('deploy') {
             when {
                 branch 'master'
+                beforeInput true
             }
             input {
                 message "Proceed with the deployment?"
                 submitter "admin"
+                parameters {
+                    choice(choices: ['softlive', 'live'], name: 'DEPLOY_ENV', description: "Which env do you want to deploy to?")
+                }
             }
 
             steps {
-                echo "just empty task instead of deployment"
+                echo "Deployment to instance: ${params.DEPLOY_ENV}"
                 echo "!!!"
                 echo "!!!"
-                echo "call it a success anyway"
+                echo "call it a success!!!"
             }
         }
     }
