@@ -27,6 +27,22 @@ pipeline {
         stage('test') {
             steps {
                 script {
+                    waitUntil {
+                        try {
+                            sh 'mvn test'
+                            true
+                        } catch (error) {
+                            input 'retry the job?'
+                            false
+                        }
+                    }
+                }
+            }
+        }
+
+        stage('testParallel') {
+            steps {
+                script {
                     parallel testStages
                 }
             }
