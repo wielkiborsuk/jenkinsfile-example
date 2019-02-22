@@ -53,5 +53,21 @@ pipeline {
                 junit allowEmptyResults: true, testResults: 'target/surefire-reports/*.xml'
             }
         }
+
+        stage('deploy') {
+            when {
+                branch 'master'
+            }
+            input {
+                message "Proceed with the deployment?"
+            }
+
+            steps {
+                echo "just empty task instead of deployment"
+                echo "!!!"
+                echo "!!!"
+                echo "call it a success anyway"
+            }
+        }
     }
 }
