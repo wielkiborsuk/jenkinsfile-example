@@ -1,4 +1,5 @@
 def testStages = (1..6).collect{ "${it}" }.collectEntries { [(it): generateStage(it)] }
+testStages.failFast = true
 def generateStage(index) {
     return {
         waitUntil {
@@ -23,7 +24,6 @@ pipeline {
     }
 
     stages {
-/*
         stage('build') {
             steps {
                 sh 'mvn clean compile'
@@ -59,7 +59,7 @@ pipeline {
                 junit allowEmptyResults: true, testResults: 'target/surefire-reports/*.xml'
             }
         }
-*/
+
         stage('deploy') {
             when {
                 branch 'master'
@@ -67,7 +67,6 @@ pipeline {
             }
             input {
                 message "Proceed with the deployment?"
-                submitter "admin,test"
                 submitterParameter "USER"
                 parameters {
                     choice(choices: ['softlive', 'live'], name: 'DEPLOY_ENV', description: "Which env do you want to deploy to?")
