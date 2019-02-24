@@ -6,6 +6,7 @@ def generateStage(index) {
             try {
               echo "This is test job number: ${index}."
               sh "mvn test -Dtest=Demo${index}Tests"
+              stash name: "testResults${index}", includes: "target/surefire-reports/*Demo${index}Tests*"
               true
             } catch(error) {
               input "Retry the job?"
@@ -20,7 +21,8 @@ pipeline {
 
     options {
         disableConcurrentBuilds()
-        buildDiscarder(logRotator(numToKeepStr: '1'))
+        buildDiscarder(logRotator(numToKeepStr: '7'))
+        preserveStashes(buildCount: 5)
     }
 
     stages {
@@ -56,6 +58,11 @@ pipeline {
 
         stage('generate reports') {
             steps {
+              script {
+                (1..6).collect { "${it}" }.each {
+                  unstash name: "testResults${it}"
+                }
+              }
                 junit allowEmptyResults: true, testResults: 'target/surefire-reports/*.xml'
             }
         }
