@@ -12,6 +12,7 @@
 ### Najprostszy build
 ```
 pipeline {
+    agent any
     stages {
         stage('Build') {
             steps {
@@ -21,3 +22,8 @@ pipeline {
     }
 }
 ```
+
+
+### Muiltibranch build
+![multibranch_setup](images/multibranch_setup.png)
+<!-- .element: class="stretch" -->
