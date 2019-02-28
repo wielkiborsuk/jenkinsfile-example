@@ -14,6 +14,12 @@ pipeline {
         }
 
         stage('publish') {
+            when {
+                //beforeInput true
+
+                branch 'master'
+            }
+
           input {
             message "Publish the app?"
               ok "Make it so!"
