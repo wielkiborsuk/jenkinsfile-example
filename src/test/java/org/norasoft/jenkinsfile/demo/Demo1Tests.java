@@ -13,7 +13,7 @@ public class Demo1Tests {
 	@Test
 	public void contextLoads1() throws InterruptedException {
 //		Thread.sleep(5000);
-		Assert.assertTrue(new Random().nextBoolean());
+		//Assert.assertTrue(new Random().nextBoolean());
 	}
 
 }
