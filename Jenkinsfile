@@ -15,7 +15,7 @@ pipeline {
 
         stage('publish') {
             when {
-                //beforeInput true
+                beforeInput true
 
                 branch 'master'
             }
