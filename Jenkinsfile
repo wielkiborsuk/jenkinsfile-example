@@ -13,6 +13,22 @@ pipeline {
             }
         }
 
+        stage('failsafe tests') {
+            steps {
+                script {
+                    waitUntil {
+                        try {
+                            sh 'mvn test -Dtest="Demo1Tests"'
+                            true
+                        } catch (error) {
+                            input 'retry the job?'
+                            false
+                        }
+                    }
+                }
+            }
+        }
+
         stage('publish') {
             when {
                 beforeInput true
