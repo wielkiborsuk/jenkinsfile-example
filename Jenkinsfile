@@ -11,6 +11,7 @@ pipeline {
     agent any
 
     options {
+      disableConcurrentBuilds()
       buildDiscarder(logRotator(numToKeepStr: '2'))
       preserveStashes(buildCount: 5)
     }
@@ -65,7 +66,7 @@ pipeline {
                 (1..6).collect { "${it}" }.each {
                   unstash name: "testResults${it}"
                   sh 'ls target/surefire-reports'
-                  sh 'cat target/surefire-reports/*Demo${it}Tests*.xml'
+                  sh "cat target/surefire-reports/*Demo${it}Tests*.xml"
                 }
               }
             }
