@@ -12,6 +12,7 @@ pipeline {
 
     options {
       buildDiscarder(logRotator(numToKeepStr: '2'))
+      preserveStashes(buildCount: 5)
     }
 
     stages {
@@ -56,6 +57,18 @@ pipeline {
               parallel testStages
             }
           }
+        }
+
+        stage('generate reports') {
+            steps {
+              script {
+                (1..6).collect { "${it}" }.each {
+                  unstash name: "testResults${it}"
+                  sh 'ls target/surefire-reports'
+                  sh 'cat target/surefire-reports/*Demo${it}Tests*.xml'
+                }
+              }
+            }
         }
 
         stage('publish') {
