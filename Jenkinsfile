@@ -7,6 +7,12 @@ pipeline {
 
     stages {
         stage('Build') {
+            when {
+                beforeInput true
+
+                branch 'master'
+            }
+
             steps {
                 sh 'mvn clean package -DskipTests'
                 echo 'new'
@@ -14,6 +20,12 @@ pipeline {
         }
 
         stage('failsafe tests') {
+            when {
+                beforeInput true
+
+                branch 'master'
+            }
+
             steps {
                 script {
                     waitUntil {
@@ -25,6 +37,18 @@ pipeline {
                             false
                         }
                     }
+                }
+            }
+        }
+
+        stage('parallel') {
+            failFast true
+            parallel {
+                stage('branch A') {
+                  steps { echo 'hello a' }
+                }
+                stage('branch B') {
+                  steps { echo 'hello b' }
                 }
             }
         }
