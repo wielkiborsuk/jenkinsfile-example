@@ -1,3 +1,12 @@
+def testStages = (1..6).collect{ "${it}" }.collectEntries { [(it): generateStage(it)] }
+def generateStage(index) {
+    return {
+        echo "This is test job number: ${index}."
+        sh "mvn test -Dtest=Demo${index}Tests"
+        stash name: "testResults${index}", includes: "target/surefire-reports/*Demo${index}Tests*"
+    }
+}
+
 pipeline {
     agent any
 
@@ -42,15 +51,11 @@ pipeline {
         }
 
         stage('parallel') {
-            failFast true
-            parallel {
-                stage('branch A') {
-                  steps { echo 'hello a' }
-                }
-                stage('branch B') {
-                  steps { echo 'hello b' }
-                }
+          steps {
+            script {
+              parallel testStages
             }
+          }
         }
 
         stage('publish') {
@@ -76,4 +81,3 @@ pipeline {
         }
     }
 }
-
